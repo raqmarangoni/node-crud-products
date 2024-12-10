@@ -10,6 +10,20 @@ class ProductsGateway {
             }
         })
     }
+
+    async getById(id){
+        return await prisma.product.findFirst({
+            select: {
+                id: true,
+                name: true,
+                price: true
+            },
+
+            where: {
+                id
+            }
+        })
+    }
 }
 
 module.exports = new ProductsGateway()
