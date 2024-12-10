@@ -24,6 +24,29 @@ class ProductsGateway {
             }
         })
     }
+
+    async getByName(name){
+        return await prisma.product.findFirst({
+            select: {
+                id: true,
+                name: true,
+                price: true
+            },
+
+            where: {
+                name
+            }
+        })
+    }
+
+    async post({ name, price }){
+        return await prisma.product.create({
+            data: {
+                name,
+                price
+            }
+        })
+    }
 }
 
 module.exports = new ProductsGateway()
