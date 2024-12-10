@@ -20,6 +20,12 @@ class ProductsService {
         if(!product) return null
         return await gateway.put({ id: parseInt(id), name, price })
     }
+
+    async delete(id){
+        const product = await gateway.getById(parseInt(id))
+        if(!product) return null
+        return await gateway.delete(parseInt(id))
+    }
 }
 
 module.exports = new ProductsService()

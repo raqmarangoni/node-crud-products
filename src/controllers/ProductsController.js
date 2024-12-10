@@ -52,6 +52,19 @@ class ProductsController {
             return res.status(500).json({ message: 'Internal Server Error' })
         }
     }
+
+    async delete(req, res){
+        try {
+            const { id } = req.params
+            if (!id) return res.status(400).json({ message: `'id' is required ` })
+            const response = await service.delete(id)
+            if(!response) return res.status(400).json({ message: `This id does not exist` })
+            return res.status(204).json()
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Server Error' })
+        }
+    }
 }
 
 module.exports = new ProductsController()

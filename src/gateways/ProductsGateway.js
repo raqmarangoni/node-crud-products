@@ -60,6 +60,14 @@ class ProductsGateway {
             }
         })
     }
+
+    async delete(id){
+        return await prisma.product.delete({
+            where: {
+                id
+            }
+        })
+    }
 }
 
 module.exports = new ProductsGateway()
