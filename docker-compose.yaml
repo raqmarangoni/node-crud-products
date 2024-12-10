@@ -1,7 +1,7 @@
 services:
   api:
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/postgres?schema=public
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/products?schema=public
     build:
       context: .
       dockerfile: Dockerfile
