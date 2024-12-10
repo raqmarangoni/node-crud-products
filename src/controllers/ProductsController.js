@@ -12,9 +12,9 @@ class ProductsController {
         }
     }
 
-    async getById(req, res) {
+    async getById({ params }, res) {
         try {
-            const { id } = req.params
+            const { id } = params
             if (!id) return res.status(400).json({ message: `'id' is required ` })
             const response = await service.getById(id)
             if (!response) return res.status(404).json({ message: 'Not Found' })
@@ -25,9 +25,9 @@ class ProductsController {
         }
     }
 
-    async post(req, res) {
+    async post({ body }, res) {
         try {
-            const { name, price } = req.body
+            const { name, price } = body
             if (!name | !price) return res.status(400).json({ message: `'name' and 'price' are required ` })
             const response = await service.post({ name, price })
             if (!response) return res.status(400).json({ message: `Entity already exist` })
@@ -38,14 +38,14 @@ class ProductsController {
         }
     }
 
-    async put(req, res) {
+    async put({ params, body }, res) {
         try {
-            const { id } = req.params
+            const { id } = params
             if (!id) return res.status(400).json({ message: `'id' is required ` })
-            const { name, price } = req.body
+            const { name, price } = body
             if (!name | !price) return res.status(400).json({ message: `'name' and 'price' are required ` })
-            const response = await service.put({ id , name, price })
-            if(!response) return res.status(400).json({ message: `This id does not exist` })
+            const response = await service.put({ id, name, price })
+            if (!response) return res.status(400).json({ message: `This id does not exist` })
             return res.status(204).json()
         } catch (error) {
             console.log(error)
@@ -53,12 +53,12 @@ class ProductsController {
         }
     }
 
-    async delete(req, res){
+    async delete({ params }, res) {
         try {
-            const { id } = req.params
+            const { id } = params
             if (!id) return res.status(400).json({ message: `'id' is required ` })
             const response = await service.delete(id)
-            if(!response) return res.status(400).json({ message: `This id does not exist` })
+            if (!response) return res.status(400).json({ message: `This id does not exist` })
             return res.status(204).json()
         } catch (error) {
             console.log(error)
