@@ -1,7 +1,7 @@
 const prisma = require('../prismaClient')
 
 class ProductsGateway {
-    async get(){
+    async get() {
         return await prisma.product.findMany({
             select: {
                 id: true,
@@ -11,7 +11,7 @@ class ProductsGateway {
         })
     }
 
-    async getById(id){
+    async getById(id) {
         return await prisma.product.findFirst({
             select: {
                 id: true,
@@ -25,7 +25,7 @@ class ProductsGateway {
         })
     }
 
-    async getByName(name){
+    async getByName(name) {
         return await prisma.product.findFirst({
             select: {
                 id: true,
@@ -39,8 +39,21 @@ class ProductsGateway {
         })
     }
 
-    async post({ name, price }){
+    async post({ name, price }) {
         return await prisma.product.create({
+            data: {
+                name,
+                price
+            }
+        })
+    }
+
+    async put({ id, name, price }) {
+        return await prisma.product.update({
+            where: {
+                id
+            },
+
             data: {
                 name,
                 price
